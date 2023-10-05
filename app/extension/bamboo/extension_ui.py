@@ -31,11 +31,9 @@ def app_specific_action(webdriver, datasets):
 
     @print_timing("selenium_app_custom_action")
     def measure():
-        @print_timing("selenium_app_custom_action:view_plan_summary_page")
+        @print_timing("selenium_app_custom_action:view_bump_build_number_page")
         def sub_measure():
-            page.go_to_url(f"{BAMBOO_SETTINGS.server_url}/browse/{build_plan_id}")
-            page.wait_until_visible((By.ID, "buildResultsTable"))  # Wait for summary field visible
-            # Wait for you app-specific UI element by ID selector
-            page.wait_until_visible((By.ID, "ID_OF_YOUR_APP_SPECIFIC_UI_ELEMENT"))
+            page.go_to_url(f"{BAMBOO_SETTINGS.server_url}/chain/admin/config/viewBuildNumber.action?buildKey={build_plan_id}")
+            page.wait_until_visible((By.ID, "bumpBuildNumber_save"))  # Wait for summary field visible
         sub_measure()
     measure()
